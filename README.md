@@ -54,61 +54,55 @@ income = price_usd × (365 - availability_365)
 ---------------------------------------------------------------------------------------------------------------------------------------------
 Airbnb Prague Market Analysis
 
-About the Project
-This project analyzes Airbnb listings in Prague based on open data from Inside Airbnb.
-The analysis was performed using SQL, with preliminary data cleaning in Python.
+This project contains an analysis of Airbnb listings in Prague based on open data from [Inside Airbnb](https://insideairbnb.com/get-the-data/) (September 2025).
 
-Date: March 2026  
-Data Source: Inside Airbnb (September 2025 snapshot)
+The analysis was performed using PostgreSQL / DBeaver, with preliminary data cleaning in Python (pandas). The data reflects predicted, not actual, income.
+
+Date: March 2026
 
 Methodology
 
-Data
+1. Data
 - Data downloaded from Inside Airbnb (September 2025 snapshot)
 - Data cleaning performed in Python:
   - Removed price outliers (kept listings under $231)
   - Removed districts with <5 listings
   - Removed erroneous records (minimum_nights > 365)
-  Final dataset: 7453 listings
+- Final dataset: 7,453 listings
 
-Calculations
+2. Calculations
 Predicted annual income is calculated using the formula:
 income = price_usd × (365 - availability_365)
 where 'availability_365' is the number of days in the next 365 that the listing is available.
 
-Results
+Analysis
+- Question 1: Income analysis by district in Prague
+- Question 2: Professionals (5+ listings) vs amateurs (1 listing)
+- Question 3: Investment attractiveness by district
+- Question 4: Impact of minimum nights on income
 
-Question 1: Income by District
-Conclusion: The highest predicted income is in the city center (Prague 1,2,3), but Prague 18 shows anomalously high income with a small number of listings.
+Conclusions
 
- Question 2: Professionals vs Amateurs
-Conclusion: Professionals dominate the market (73% of listings), charge higher prices (+17%), but have lower occupancy. Final income is only 5.5% higher than amateurs.
+1. Income by District
+- Highest income: Praha 18 ($20,471) - anomaly, few listings (11)
+- City center: Praha 1 ($17,864), Praha 2 ($17,299), Praha 13 ($17,467)
+- Best value: Praha 3 ($14,263) - low price ($78), high occupancy (191 days)
+- Lowest income: Praha 15 ($6,520), Velká Chuchle ($7,993)
 
-Question 3: Investment Attractiveness
+2. Professionals vs Amateurs
+Professionals dominate the market (73% of listings), charge higher prices (+17%), but have lower occupancy. Final income is only 5.5% higher than amateurs.
+
+3. Investment Attractiveness
 Best price-occupancy ratio:
-- Prague 2 - optimal balance
-- Prague 3 - low price, high occupancy
-- Prague 10 - good potential
+- Praha 2 - optimal balance of price and occupancy
+- Praha 3 - low price, high occupancy
+- Praha 10 - good potential
 
-Question 4: Impact of Minimum Nights
-Conclusion: The most profitable minimum stay is 3-4 nights. The "1 night" strategy yields the lowest income due to low occupancy.
-
-Commentary
-As someone with experience in short-term rental management in Ukraine, I can compare the two markets. In Prague, 73% of the market is controlled by professionals with 5+ apartments - a sign of a mature business. Interestingly, amateurs with lower prices have higher occupancy (177 vs 167 days), which confirms my experience: personal approach is often more important than the perfect price.
-Most striking is that even with 50% occupancy, a property owner in Prague earns $16,000-20,000 in net income. For comparison: in Ukraine, with subletting at a similar price, after deducting rent to the owner ($800-1000/month), net income would be $5,000-7,000. This explains why business scales in Prague but remains amateur in Ukraine.
-
-Limitations
-- Data reflects predicted, not actual, income
-- Analysis is based on a September 2025 data snapshot
-
-Tools Used
-- Python (pandas) - data cleaning
-- PostgreSQL / DBeaver - SQL queries
-- GitHub - project hosting
-
+4. Impact of Minimum Nights
+The most profitable minimum stay is 3-4 nights ($17,070/year). The "1 night" strategy yields the lowest income ($14,520/year) due to low occupancy.
 
 Files
 - 'prague_airbnb_analysis.sql' - SQL queries for all four questions
-- '*csv' - query results
+- '*.csv' - query results
 
 
